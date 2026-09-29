@@ -27,10 +27,10 @@ export default function EvidenceVault() {
 
   const canReview = role === "Verifier";
   const rows = evidence.filter((e) => cat === "All" || e.category === cat);
-  const counts = {
-    total: meta.evidenceItems, accepted: evidence.filter((e) => e.status === "ACCEPTED").length,
-    pending: evidence.filter((e) => e.status === "PENDING").length, rejected: evidence.filter((e) => e.status === "REJECTED").length,
-  };
+  // Derive full-corpus counts from the 186-item baseline plus live changes to the sampled rows (always totals 186).
+  const pending = evidence.filter((e) => e.status === "PENDING").length + 3;
+  const rejected = evidence.filter((e) => e.status === "REJECTED").length + 1;
+  const counts = { total: meta.evidenceItems, pending, rejected, accepted: meta.evidenceItems - pending - rejected };
 
   const doReview = (id, decision) => {
     if (!canReview) { toast.error("Only a Verifier can review evidence."); return; }
@@ -43,7 +43,7 @@ export default function EvidenceVault() {
     <div className="space-y-5">
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Kpi testid="kpi-evidence-items" label="Evidence Items" value={counts.total} />
-        <Kpi testid="kpi-evidence-accepted" label="Accepted" value={169 + counts.accepted - 3} tone="green" />
+        <Kpi testid="kpi-evidence-accepted" label="Accepted" value={counts.accepted} tone="green" />
         <Kpi testid="kpi-evidence-pending" label="Pending Review" value={counts.pending} tone="amber" />
         <Kpi testid="kpi-evidence-rejected" label="Rejected / Missing" value={counts.rejected} tone="red" />
       </div>
