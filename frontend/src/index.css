@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    margin: 0;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+@layer base {
+    :root {
+        --background: 210 20% 98%;
+        --foreground: 222 33% 12%;
+        --card: 0 0% 100%;
+        --card-foreground: 222 33% 12%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 222 33% 12%;
+        --primary: 158 72% 38%;
+        --primary-foreground: 0 0% 100%;
+        --secondary: 210 16% 96%;
+        --secondary-foreground: 222 33% 18%;
+        --muted: 210 16% 95%;
+        --muted-foreground: 215 16% 47%;
+        --accent: 158 55% 94%;
+        --accent-foreground: 158 72% 24%;
+        --destructive: 0 74% 51%;
+        --destructive-foreground: 0 0% 100%;
+        --border: 214 20% 90%;
+        --input: 214 20% 90%;
+        --ring: 158 72% 38%;
+        --chart-1: 158 72% 38%;
+        --chart-2: 199 89% 48%;
+        --chart-3: 43 89% 52%;
+        --chart-4: 0 74% 51%;
+        --chart-5: 262 60% 55%;
+        --radius: 0.75rem;
+
+        --sidebar: 222 39% 9%;
+        --sidebar-hover: 222 30% 15%;
+        --sidebar-fg: 214 20% 72%;
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
+}
+
+/* Saurient brand helpers */
+.brand-green { color: hsl(158 72% 38%); }
+.bg-sidebar { background-color: hsl(var(--sidebar)); }
+
+/* thin scrollbar for workspace */
+.thin-scroll::-webkit-scrollbar { height: 8px; width: 8px; }
+.thin-scroll::-webkit-scrollbar-thumb { background: hsl(214 20% 82%); border-radius: 8px; }
+
+@layer base {
+    [data-debug-wrapper="true"] { display: contents !important; }
+}
